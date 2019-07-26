@@ -31,3 +31,16 @@ while(dead==False):
 
     pygame.display.flip()
     clock.tick(clock_tick_rate)
+
+    keys = pygame.key.get_pressed()
+
+    #Keys
+    if keys[pygame.K_LEFT] and x > speed:
+        x -= speed
+    if keys[pygame.K_RIGHT] and x < window_width:
+        x += speed
+    if keys[pygame.K_UP] and y > speed:
+        y -= speed
+    if keys[pygame.K_DOWN] and y < window_height:
+        y += speed
+    screen.fill((0,0,0))
