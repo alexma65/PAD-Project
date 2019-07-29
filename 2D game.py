@@ -1,53 +1,5 @@
+
 # import pygame
-import pygame
-
-# initialize game engine
-pygame.init()
-
-window_width=1600
-window_height=1159
-
-animation_increment=10
-clock_tick_rate=20
-
-# Open a window
-size = (window_width, window_height)
-screen = pygame.display.set_mode(size)
-
-# Set title to the window
-pygame.display.set_caption("Hello World")
-
-dead=False
-
-clock = pygame.time.Clock()
-background_image = pygame.image.load("dims.jpg").convert()
-
-while(dead==False):
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            dead = True
-
-    screen.blit(background_image, [0, 0])
-
-    pygame.display.flip()
-    clock.tick(clock_tick_rate)
-
-    keys = pygame.key.get_pressed()
-
-    #Keys
-    if keys[pygame.K_LEFT] and x > speed:
-        x -= speed
-    if keys[pygame.K_RIGHT] and x < window_width:
-        x += speed
-    if keys[pygame.K_UP] and y > speed:
-        y -= speed
-    if keys[pygame.K_DOWN] and y < window_height:
-        y += speed
-    screen.fill((0,0,0))
-    
-    
-    """
-    # import pygame
 import pygame
 
 # initialize game engine
@@ -55,6 +7,8 @@ pygame.init()
 
 window_width=800
 window_height=600
+
+ALPHA=(0,0,0)
 
 animation_increment=10
 clock_tick_rate=20
@@ -69,23 +23,30 @@ pygame.display.set_caption("2D_Game")
 dead=False
 
 clock = pygame.time.Clock()
-background_image = pygame.image.load("dims.jpg").convert()
+background_image = pygame.image.load("C:/users/zsb20/PycharmProjects/projecto/images/dims.jpg").convert()
 
-x = 10
-y = 10
-width = 20
-height = 30
-speed = 10
 
-#Creat a player
-class Player:
-    x = 10
-    y = 10
-    width = 20
-    height = 30
-    speed = 10
+class Player(pygame.sprite.Sprite):
+        def __init__(self):
+            pygame.sprite.Sprite.__init__(self)
+            self.movex = 0
+            self.movey = 0
+            self.frame = 0
+            self.images = []
+            img = pygame.image.load('C:/Users/zsb20/PycharmProjects/projecto/images/astro1.png').convert()
+            img.convert_alpha()  # optimise alpha
+            img.set_colorkey(ALPHA)
+            self.images.append(img)
+            self.image = self.images[0]
+            self.rect = self.image.get_rect()
 
-while(dead==False):
+player = Player()
+player.rect.x = 0
+player.rect.y = 0
+player_list = pygame.sprite.Group()
+player_list.add(player)
+
+while(not dead):
     pygame.time.delay(50)
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -95,22 +56,20 @@ while(dead==False):
 
     pygame.display.flip()
     clock.tick(clock_tick_rate)
-    pygame.draw.rect(screen,(255,0,0),(x,y,width,height))
-    pygame.display.update()
+    player_list.draw(screen)
 
+
+
+    pygame.display.update()
     #keys
     keys = pygame.key.get_pressed()
-
-    if keys[pygame.K_LEFT] and x > speed:
-        x -= speed
-    if keys[pygame.K_RIGHT] and x < window_width:
-        x += speed
-    if keys[pygame.K_UP] and y > speed:
-        y -= speed
-    if keys[pygame.K_DOWN] and y < window_height:
-        y += speed
+    #
+    if keys[pygame.K_LEFT]: player.rect.x -= 10
+    if keys[pygame.K_RIGHT]: player.rect.x += 10
+    if keys[pygame.K_UP]: player.rect.y -=10
+    if keys[pygame.K_DOWN]: player.rect.y +=10
     screen.fill((0,0,0))
 
 pygame.quit()
-    """
+
     
