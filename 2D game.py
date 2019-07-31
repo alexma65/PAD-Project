@@ -45,9 +45,9 @@ class Player(pygame.sprite.Sprite):
 
 class Enemy(pygame.sprite.Sprite):
 
-    def __init__(self,x,y,img):
+    def __init__(self,x,y):
         pygame.sprite.Sprite.__init__(self)
-        self.image = pygame.image.load(os.path.join('C:/Users/zsb20/PycharmProjects/projecto/images/enemy1.png',img))
+        self.image = pygame.image.load('C:/Users/zsb20/PycharmProjects/projecto/images/enemy1.png').convert()
         self.image.convert_alpha()
         self.image.set_colorkey(ALPHA)
         self.rect = self.image.get_rect()
@@ -73,7 +73,7 @@ player.rect.y = 0
 player_list = pygame.sprite.Group()
 player_list.add(player)
 
-enemy   = Enemy(20,200,'C:/Users/zsb20/PycharmProjects/projecto/images/enemy1.png')
+enemy   = Enemy(20,200)
 enemy_list = pygame.sprite.Group()
 enemy_list.add(enemy)
 
@@ -92,6 +92,11 @@ while(not dead):
     enemy_list.draw(screen)
     for e in enemy_list:
         e.move()
+
+    def checkCollision(player, enemy):
+        col = pygame.sprite.collide_rect(player, enemy)
+        if col == True:
+            sys.exit()
 
 
     pygame.display.update()
