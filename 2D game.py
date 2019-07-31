@@ -1,6 +1,7 @@
 
 # import pygame
 import pygame
+import random
 import os
 import sys
 
@@ -57,7 +58,7 @@ class Enemy(pygame.sprite.Sprite):
 
     def move(self):
         distance = 80
-        speed = 5
+        speed = random.randint(-10,20)
 
         if self.counter >= 0 and self.counter <= distance:
             self.rect.x += speed
@@ -73,10 +74,17 @@ player.rect.y = 0
 player_list = pygame.sprite.Group()
 player_list.add(player)
 
-enemy   = Enemy(20,200)
 enemy_list = pygame.sprite.Group()
-enemy_list.add(enemy)
+for i in range(5):
+    enemy   = Enemy(20,100*(i+1))
 
+    enemy_list.add(enemy)
+
+
+def checkCollision(player, enemy):
+    col = pygame.sprite.collide_rect(player, enemy)
+    if col == True:
+        sys.exit()
 
 while(not dead):
     pygame.time.delay(50)
@@ -92,11 +100,9 @@ while(not dead):
     enemy_list.draw(screen)
     for e in enemy_list:
         e.move()
+        checkCollision(player,e)
 
-    def checkCollision(player, enemy):
-        col = pygame.sprite.collide_rect(player, enemy)
-        if col == True:
-            sys.exit()
+
 
 
     pygame.display.update()
@@ -108,4 +114,3 @@ while(not dead):
     screen.fill((0,0,0))
 
 pygame.quit()
-
