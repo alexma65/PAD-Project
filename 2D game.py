@@ -85,9 +85,13 @@ def checkCollision(player, enemy):
     col = pygame.sprite.collide_rect(player, enemy)
     if col == True:
         sys.exit()
-font = pygame.font.SysFont("comicsansms", 30)
 
-text = font.render("Score: ", True, (255, 255, 255))
+def scoreCounter():
+        font = pygame.font.SysFont("comicsansms", 30)
+        score = 0
+        text = font.render("Score: " + str(score), True, (255, 255, 255))
+        if col == True:
+                score + 1
 
 while(not dead):
     pygame.time.delay(50)
