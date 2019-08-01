@@ -26,8 +26,6 @@ while(not dead):
             if button.collidepoint(mouse_pos):
                 print('button was pressed at {0}'.format(mouse_pos))
     pygame.draw.rect(screen, [255, 0, 0], button)
-    screen.blit(button, (0, 600))
-
 
 
     pygame.display.flip()
