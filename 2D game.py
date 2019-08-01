@@ -119,3 +119,44 @@ while(not dead):
     screen.fill((0,0,0))
 
 pygame.quit()
+
+
+
+
+
+"""
+white = (255,255,255)
+black = (0,0,0)
+red = (255,0,0)
+green = (0,155,0)
+
+smallfont = pygame.font.SysFont("comicsansms", 25)
+medfont = pygame.font.SysFont("comicsansms", 50)
+largefont = pygame.font.SysFont("comicsansms", 80)
+
+#Start Screen
+def game_intro():
+    intro = True
+    while intro:
+        screen.fill((255,255,255))
+        message_display("Welcome to the Game")
+        pygame.display.update()
+        clock.tick(5)
+
+def text_objects(text, font):
+    textSurface = font.render(text, True, black)
+    return textSurface, textSurface.get_rect()
+
+def message_display(text):
+    largeText = pygame.font.Font('freesansbold.ttf', 50)
+    TextSurf, TextRect = text_objects(text, largeText)
+    TextRect.center = ((window_width/2),(window_height/2))
+    screen.blit(TextSurf,TextRect)
+
+    pygame.display.update()
+
+    time.sleep(2)
+
+    game_loop()
+    
+"""
