@@ -1,0 +1,44 @@
+import pygame
+pygame.init()
+
+
+window_width=800
+window_height=600
+
+
+size = (window_width, window_height)
+screen = pygame.display.set_mode(size)
+
+pygame.display.set_caption("Random Screen")
+
+
+dead=False
+
+clock = pygame.time.Clock()
+
+font = pygame.font.SysFont("comicsansms", 30)
+
+
+clock = pygame.time.Clock()
+seconds = 0
+milliseconds = 0
+
+while(not dead):
+    pygame.time.delay(50)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            dead = True
+    if milliseconds > 1000:
+        seconds += 1
+        milliseconds -= 1000
+        pygame.display.update()
+    milliseconds += clock.tick_busy_loop(60)
+    timelabel = font.render("{}:{}".format(seconds, milliseconds), True, (255,255,255))
+    screen.blit(timelabel, (0, 0))
+    screen.fill((0, 0, 0))
+
+
+    pygame.display.flip()
+
+
+pygame.quit()
