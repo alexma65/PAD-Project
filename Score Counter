@@ -1,0 +1,35 @@
+import pygame
+pygame.init()
+
+
+window_width=800
+window_height=600
+
+
+size = (window_width, window_height)
+screen = pygame.display.set_mode(size)
+
+pygame.display.set_caption("Random Screen")
+
+
+dead=False
+
+clock = pygame.time.Clock()
+
+font = pygame.font.SysFont("comicsansms", 30)
+
+text = font.render("Score: ", True, (255, 255, 255))
+
+while(not dead):
+    pygame.time.delay(50)
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            dead = True
+    screen.fill((0, 0, 0))
+    screen.blit(text, (600, 0))
+
+
+    pygame.display.flip()
+
+
+pygame.quit()
