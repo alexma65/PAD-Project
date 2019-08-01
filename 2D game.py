@@ -85,6 +85,9 @@ def checkCollision(player, enemy):
     col = pygame.sprite.collide_rect(player, enemy)
     if col == True:
         sys.exit()
+font = pygame.font.SysFont("comicsansms", 30)
+
+text = font.render("Score: ", True, (255, 255, 255))
 
 while(not dead):
     pygame.time.delay(50)
@@ -101,9 +104,7 @@ while(not dead):
     for e in enemy_list:
         e.move()
         checkCollision(player,e)
-
-
-
+    screen.blit(text, (600, 0))
 
     pygame.display.update()
     keys = pygame.key.get_pressed()
